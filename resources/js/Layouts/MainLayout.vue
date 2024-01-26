@@ -12,6 +12,7 @@ import AccountOutline from "vue-material-design-icons/AccountOutline.vue";
 import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 import AccountPlusOutline from "vue-material-design-icons/AccountPlusOutline.vue";
 
+import MenuItem from "@/Components/MenuItem.vue";
 let showCreatePost = ref(false);
 </script>
 
@@ -58,6 +59,52 @@ let showCreatePost = ref(false);
             </Link>
             <div class="font-extrabold text-lg">NAME HERE</div>
             <AccountPlusOutline :size="30" class="cursor-pointer px-4" />
+        </div>
+        <div
+            id="SideNav"
+            class="fixed h-full bg-white xl:w-[280px] w-[80px] md:block hidden border-r border-r-gray-300"
+        >
+            <Link href="/">
+                <img
+                    class="xl:hidden block w-[25px] mt-10 ml-[25px] mb-10 cursor-pointer"
+                    src="/insta-logo-small.png"
+                />
+                <img
+                    class="xl:block hidden w-[120px] mt-10 ml-6 mb-10 cursor-pointer"
+                    src="/insta-logo.png"
+                />
+            </Link>
+
+            <div class="px-3">
+                <Link href="/">
+                    <MenuItem iconString="Home" class="mb-4" />
+                </Link>
+                <MenuItem iconString="Search" class="mb-4" />
+                <MenuItem iconString="Explore" class="mb-4" />
+                <MenuItem iconString="Messages" class="mb-4" />
+                <MenuItem iconString="Notifications" class="mb-4" />
+                <MenuItem
+                    @click="showCreatePost = true"
+                    iconString="Create"
+                    class="mb-4"
+                />
+                <Link
+                    :href="
+                        route('users.show', { id: $page.props.auth.user.id })
+                    "
+                >
+                    <MenuItem iconString="Profile" class="mb-4" />
+                </Link>
+            </div>
+
+            <Link
+                :href="route('logout')"
+                as="button"
+                method="post"
+                class="absolute bottom-0 px-3 w-full"
+            >
+                <MenuItem iconString="Log out" class="mb-4" />
+            </Link>
         </div>
     </div>
 </template>
